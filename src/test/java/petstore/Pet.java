@@ -43,15 +43,31 @@ public class Pet {
                 .log().all()
                 .statusCode(200)
                 .body("name", is("Heros"))
-                .body("status", is ("available"))
+                .body("status", is("available"))
                 .body("category.name", is("dog")) // is quando tiver categoria sem lista ou array
                 .body("tags.name", contains("sta")) // contains quando tiver array, lista
 
 
         ;
 
+    }
+    @Test
+    public void consultarPet(){
+        String petId = "10302197300";
 
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .get(uri + "/" +  petId)
 
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Heros"))
+                .body("category.name", is("dog"))
+                .body("status", is("available"))
+        ;
     }
 
 
